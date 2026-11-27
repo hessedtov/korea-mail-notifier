@@ -7,7 +7,7 @@
 선생님 등 다른 교직원도 쓸 수 있습니다.
 
 > 행정안전부 또는 공직자통합메일 운영 기관이 만든 공식 프로그램이 아닙니다.
-> 업무용 PC에 설치하기 전에 학교(기관) 정보보안 담당자에게 확인하세요.
+> 업무용 PC에서 쓸 수 있는 범위는 기관에 따라 다를 수 있습니다.
 
 - 📄 설명 페이지: https://hessedtov.github.io/korea-mail-notifier/
 - ▶️ 소개 동영상: https://www.youtube.com/watch?v=K6is-JRe3_g
