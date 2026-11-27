@@ -4,31 +4,78 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>공직자통합메일도우미(학교)</title>
+<meta name="description" content="학교 행정실 직원을 위한 공직자통합메일(korea.kr) 크롬 확장프로그램(비공식). 새 메일 알림과, 견적·계약·세금계산서 메일을 업체별로 찾는 빠른 검색.">
 <style>
-  body { font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; max-width: 760px; margin: 0 auto; padding: 32px 16px 56px; line-height: 1.7; color: #333; background: #fff; }
-  h1 { font-size: 24px; color: #1554b8; margin-bottom: 4px; }
-  h2 { font-size: 18px; margin-top: 32px; border-bottom: 2px solid #e3ecf8; padding-bottom: 4px; }
-  h3 { font-size: 16px; margin: 20px 0 4px; }
-  .lead { font-size: 16px; }
+  * { box-sizing: border-box; }
+  body { font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; margin: 0; line-height: 1.7; color: #333; background: #fff; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+  header { background: linear-gradient(135deg, #2b7de9, #1554b8); color: #fff; padding: 40px 0 34px; }
+  header h1 { font-size: 30px; margin: 0 0 6px; letter-spacing: -0.5px; }
+  header p { margin: 0; font-size: 17px; opacity: .95; }
+  header .tag { display: inline-block; margin-top: 12px; font-size: 13px; background: rgba(255,255,255,.18); border-radius: 12px; padding: 2px 10px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .btn { display: inline-block; padding: 9px 18px; border-radius: 4px; text-decoration: none; font-weight: 700; font-size: 15px; }
+  .btn.w { background: #fff; color: #1554b8; }
+  .btn.o { border: 1px solid rgba(255,255,255,.8); color: #fff; }
+  .btn.b { background: #2b7de9; color: #fff; }
+  h2 { font-size: 21px; margin: 44px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #e3ecf8; color: #1d3f72; }
+  h3 { font-size: 17px; margin: 22px 0 6px; }
+  .lead { font-size: 16px; margin-top: 26px; }
   .note { background: #fff8e1; border: 1px solid #f0d27a; border-radius: 6px; padding: 10px 14px; font-size: 14px; }
   .muted { color: #666; font-size: 14px; }
-  ul { padding-left: 22px; }
-  li { margin: 3px 0; }
+  ul, ol { padding-left: 22px; } li { margin: 3px 0; }
   a { color: #1a5fc8; }
-  .btn { display: inline-block; margin-top: 8px; padding: 8px 16px; background: #2b7de9; color: #fff; border-radius: 4px; text-decoration: none; font-weight: 700; }
+  .video { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,.15); background: #000; }
+  .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .shots figure { margin: 0; }
+  .shots img { width: 100%; display: block; border: 1px solid #d5e2f3; border-radius: 4px; }
+  .shots figcaption { font-size: 14px; color: #555; margin-top: 4px; text-align: center; }
+  .box { border: 1px solid #d5e2f3; border-radius: 6px; padding: 14px 18px; margin: 12px 0; background: #f7faff; }
+  .box h3 { margin-top: 0; }
+  kbd { border: 1px solid #ccc; border-bottom-width: 2px; border-radius: 3px; padding: 0 5px; font-size: 13px; background: #fafafa; }
+  code { background: #f1f3f6; border-radius: 3px; padding: 1px 5px; font-size: 14px; }
+  footer { margin: 50px 0 0; padding: 20px 0 36px; border-top: 1px solid #e5e5e5; color: #777; font-size: 13px; }
+  @media (max-width: 640px) { .shots { grid-template-columns: 1fr; } header h1 { font-size: 24px; } }
 </style>
 </head>
 <body>
-<h1>공직자통합메일도우미(학교)</h1>
-<p class="muted">공직자통합메일(korea.kr) 크롬 확장프로그램 · 비공식</p>
+<header>
+  <div class="wrap">
+    <h1>공직자통합메일도우미(학교)</h1>
+    <p>학교 행정실 직원을 위한 공직자통합메일(korea.kr) 크롬 확장프로그램</p>
+    <span class="tag">비공식 · 무료 · 메일 내용은 이 PC 밖으로 나가지 않음</span>
+    <div class="cta">
+      <a class="btn w" href="#install">설치하기</a>
+      <a class="btn o" href="#video">동영상으로 보기</a>
+      <a class="btn o" href="school/">개인정보처리방침</a>
+    </div>
+  </div>
+</header>
 
-<p class="lead">학교 행정실 직원을 위해 만든 도우미입니다.<br>
-행정실에는 업체와 주고받는 견적서·계약 서류·거래명세서·세금계산서·완납증명서 메일이 하루에도 수십 통씩 쌓입니다.
+<main class="wrap">
+<p class="lead">행정실에는 업체와 주고받는 견적서·계약 서류·거래명세서·세금계산서·완납증명서 메일이 하루에도 수십 통씩 쌓입니다.
 이 도우미는 새 메일을 놓치지 않게 알려 주고, 지난 메일을 업체별·업무 단계별로 빨리 찾게 해 줍니다.
 선생님 등 다른 교직원도 쓸 수 있습니다.</p>
 
 <p class="note">행정안전부 또는 공직자통합메일 운영 기관이 만든 공식 프로그램이 아닙니다.
 업무용 PC에 설치하기 전에 학교(기관) 정보보안 담당자에게 확인하세요.</p>
+
+<h2 id="video">동영상으로 보기</h2>
+<div class="video">
+  <iframe src="https://www.youtube-nocookie.com/embed/K6is-JRe3_g" title="공직자통합메일도우미(학교) 소개 동영상" loading="lazy"
+    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+<p class="muted">예시 화면입니다. 영상이 안 보이면 <a href="https://www.youtube.com/watch?v=K6is-JRe3_g">유튜브에서 보기</a></p>
+
+<h2>화면 미리 보기</h2>
+<div class="shots">
+  <figure><img src="images/screenshot-1.png" alt="메일 화면 안 빠른 검색 탭" loading="lazy"><figcaption>메일 화면 안 ‘빠른 검색’ 탭</figcaption></figure>
+  <figure><img src="images/screenshot-2.png" alt="초성으로 찾기" loading="lazy"><figcaption>초성만 알아도 찾기</figcaption></figure>
+  <figure><img src="images/screenshot-3.png" alt="거래처별 모아 보기" loading="lazy"><figcaption>거래처별 모아 보기</figcaption></figure>
+  <figure><img src="images/screenshot-4.png" alt="새 메일 알림 창" loading="lazy"><figcaption>오른쪽 아래 새 메일 알림 창</figcaption></figure>
+</div>
+<p class="muted">화면의 업체·학교 이름과 메일은 모두 지어낸 예시입니다.</p>
 
 <h2>주요 기능</h2>
 
@@ -61,6 +108,33 @@
   <li>같은 제목(RE:/FW:)끼리 묶고, 받은 메일은 파란 띠·보낸 메일은 빨간 띠로 구분합니다.</li>
 </ul>
 
+<h2 id="install">설치하기</h2>
+<div class="box">
+  <h3>크롬 웹 스토어 (준비 중)</h3>
+  크롬 웹 스토어 등록 심사 중입니다. 등록이 끝나면 여기에 설치 링크를 걸어 둡니다. 스토어에서 설치하면 새 버전이 나올 때 저절로 업데이트됩니다.
+</div>
+<div class="box">
+  <h3>지금 바로 설치 (파일 내려받기)</h3>
+  <a class="btn b" href="download/mail-helper-school-1.0.0.zip" download>mail-helper-school-1.0.0.zip 내려받기</a>
+  <span class="muted">버전 1.0.0 · 약 1.6MB</span>
+  <ol>
+    <li>내려받은 압축 파일을 풀어, 지워지지 않을 곳(예: 문서 폴더)에 둡니다. <span class="muted">이 폴더를 지우거나 옮기면 작동하지 않습니다.</span></li>
+    <li>크롬 주소창에 <code>chrome://extensions</code> 를 입력합니다.</li>
+    <li>오른쪽 위 <b>개발자 모드</b>를 켭니다.</li>
+    <li><b>압축해제된 확장 프로그램을 로드합니다</b>를 눌러 1번의 폴더를 고릅니다.</li>
+    <li>크롬 오른쪽 위 퍼즐 모양(🧩) 아이콘 → 이 확장프로그램 옆 📌 핀을 눌러 고정합니다.</li>
+  </ol>
+  <p class="muted">파일로 설치하면 저절로 업데이트되지 않습니다. 스토어 등록이 끝나면 스토어 버전으로 바꾸는 것을 권합니다. (파일로 설치한 것은 지우고 스토어에서 설치)</p>
+</div>
+
+<h3>처음 쓰는 순서</h3>
+<ol>
+  <li>공직자통합메일에 평소처럼 인증서로 로그인합니다. 몇 분 안에 새 메일 확인이 시작됩니다.</li>
+  <li>메일 화면 검색창 오른쪽 <b>🔍 빠른 검색</b> 칸에 아무 낱말이나 치면 ‘빠른 검색’ 탭이 열립니다.</li>
+  <li>가운데의 <b>목록 모으기</b>를 한 번 누릅니다. 메일 7천 통이면 2~3분쯤 걸리고, 그동안 다른 일을 해도 됩니다.</li>
+  <li>이제 칸에 치는 대로 찾습니다. 그다음부터는 새 메일이 저절로 목록에 더해집니다.</li>
+</ol>
+
 <h2>메일 서버에 부담을 주지 않도록</h2>
 <ul>
   <li>요청은 한 번에 하나씩, 1.5초 넘게 쉬어 가며 1분에 20번을 넘기지 않습니다.</li>
@@ -74,6 +148,18 @@
   <li>메일 본문과 첨부파일은 가져오지 않으며, 메일을 옮기거나 지우거나 읽음으로 바꾸는 요청을 보내지 않습니다.</li>
   <li>개발자 서버가 없고, 분석·광고 도구를 쓰지 않습니다.</li>
 </ul>
-<a class="btn" href="school/">개인정보처리방침 보기</a>
+<a class="btn b" href="school/">개인정보처리방침 보기</a>
+
+<h2>알아 두기</h2>
+<ul>
+  <li>업무 단계·분야·거래처는 제목과 보낸 사람으로 짐작한 것이라 틀릴 수 있습니다.</li>
+  <li>지우거나 옮긴 메일, 다른 곳에서 읽은 표시는 하루 한 번 전체 맞춤 때 검색 목록에 반영됩니다.</li>
+  <li>로그인 자동 연장을 켜 두면 로그인이 하루 종일 유지되므로, 자리를 비울 때는 <kbd>Win</kbd>+<kbd>L</kbd>로 화면을 잠그세요.</li>
+</ul>
+</main>
+
+<footer>
+  <div class="wrap">공직자통합메일도우미(학교) · 비공식 프로그램 · <a href="school/">개인정보처리방침</a></div>
+</footer>
 </body>
 </html>
